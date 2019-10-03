@@ -41,8 +41,9 @@
                                 <i class="ti-user"></i>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" routerLink="/login"> login</a>
-                                <a class="dropdown-item" routerLink="/register">register</a>
+                                <a class="dropdown-item" *ngIf="!auth.isLoggedIn()" routerLink="/login"> sign in</a>
+
+                                <a class="dropdown-item" href="" (click)="logout()" *ngIf="auth.isLoggedIn()">logout</a>
                             </div>
                             
                         </div>

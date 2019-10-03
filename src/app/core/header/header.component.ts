@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/Service/auth.service';
 declare var $:any;
 @Component({
   selector: 'app-header',
@@ -7,9 +8,10 @@ declare var $:any;
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(public auth:AuthService) { }
 
   ngOnInit() { 
+    console.log(this.auth.isLoggedIn());
     $("#search_input_box").hide();
   $("#search_1").on("click", function () {
     $("#search_input_box").slideToggle();
@@ -17,8 +19,11 @@ export class HeaderComponent implements OnInit {
   });
   $("#close_search").on("click", function () {
     $('#search_input_box').slideUp(500);
-  });
+  })
+}
 
-  }
+logout(){
+  this.auth.logout()
+}
 
 }
