@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseUISignInSuccessWithAuthResult, FirebaseUISignInFailure } from 'firebaseui-angular';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
@@ -10,11 +10,11 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private router:Router,private afAuth: AngularFireAuth){}
-
+  constructor(private router:Router,private afAuth: AngularFireAuth,private route:ActivatedRoute){}
+   returnUrl 
   ngOnInit(){
     this.afAuth.authState.subscribe(this.firebaseAuthChangeListener);
-    
+    this.returnUrl = this.route.snapshot.queryParamMap.get('returnUrl')
   }
 
   private firebaseAuthChangeListener(response) {
@@ -32,7 +32,9 @@ export class LoginComponent implements OnInit {
 
  successCallback(data: FirebaseUISignInSuccessWithAuthResult) {
   console.log('successCallback', data);
-  this.router.navigate(['/']);
+  this.afAuth.idTokenResult.subscribe(d=>{console.log(d.token)
+  localStorage.setItem('token',d.token)})
+  this.router.navigate([this.returnUrl || '/category']);
 }
 
 errorCallback(data: FirebaseUISignInFailure) {

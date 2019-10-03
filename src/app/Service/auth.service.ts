@@ -26,6 +26,7 @@ export class AuthService {
   }
 
   logout(){
+    localStorage.removeItem('token')
     this.afAuth.auth.signOut();
   }
 }
