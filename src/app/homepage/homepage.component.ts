@@ -6,9 +6,12 @@ declare var $:any;
   styleUrls: ['./homepage.component.scss']
 })
 export class HomepageComponent implements OnInit {
+  
+  products=[1,2,3,4,5,6,7,8]
 
+  cars=[1,23,4,5]
   constructor() { }
-
+  
   ngOnInit() {
     var product_list_slider = $('.product_list_slider');
     if (product_list_slider.length) {

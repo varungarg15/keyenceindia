@@ -1,0 +1,22 @@
+<agm-map 
+  [latitude]="lat"
+  [longitude]="lng"
+  [zoom]="zoom"
+  [disableDefaultUI]="false"
+  [zoomControl]="false"
+  >
+
+  <agm-marker 
+  (markerClick)="clickedMarker(m.label, 0)"
+  [latitude]="lat"
+  [longitude]="lng"
+  (dragEnd)="markerDragEnd(m, $event)">
+  
+<agm-info-window>
+  <strong>{{name}}</strong>
+</agm-info-window>
+
+</agm-marker>
+ 
+
+</agm-map>

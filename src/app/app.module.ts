@@ -1,38 +1,30 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CategoryComponent } from './category/category.component';
 import { HomepageComponent } from './homepage/homepage.component';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import { ProductDetailComponent } from './product-detail/product-detail.component';
-import { CartComponent } from './cart/cart.component';
-import { CheckoutComponent } from './checkout/checkout.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { ConfirmationComponent } from './confirmation/confirmation.component';
+import { ContactComponent } from './contact/contact.component';
+import { CoreModule } from './core/core.module';
+import { AuthModule } from './auth/auth.module';
+import { ProductModule } from './product/product.module';
+import { ShoppingModule } from './shopping/shopping.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CategoryComponent,
     HomepageComponent,
-    HeaderComponent,
-    FooterComponent,
-    ProductDetailComponent,
-    CartComponent,
-    CheckoutComponent,
-    LoginComponent,
-    RegisterComponent,
-    ConfirmationComponent
+    ContactComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    CoreModule,
+    AuthModule,
+    ProductModule,
+    ShoppingModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas:[NO_ERRORS_SCHEMA]
 })
 export class AppModule { }
