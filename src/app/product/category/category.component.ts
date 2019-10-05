@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ProductService } from 'src/app/Service/product.service';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/take';
 declare var $:any;
 @Component({
   selector: 'app-category',
@@ -7,10 +10,29 @@ declare var $:any;
   styleUrls: ['./category.component.scss']
 })
 export class CategoryComponent implements OnInit {
-  products=[1,2,3,45,5,7,8,9,0,6];
-  constructor(private router:Router) { }
- 
+
+  products;
+  subscription;
+  filteredProduct;
+  categories;
+  category;
+  
+  constructor(public productService:ProductService,private route:ActivatedRoute,private router:Router) {
+  }
+
   ngOnInit() {
+    this.subscription= this.productService.getAll().valueChanges()
+    .switchMap(products => {
+      this.filteredProduct = products;
+      return this.route.queryParamMap;
+    })
+    .subscribe(params => {
+      this.category = params.get('category');
+      this.applyFilter();      
+    });
+
+  // this.subscription.subscribe(p=>{console.log(p)})
+    this.getCategories()
     var best_product_slider = $('.best_product_slider');
     if (best_product_slider.length) {
       best_product_slider.owlCarousel({
@@ -48,12 +70,30 @@ export class CategoryComponent implements OnInit {
     }
   }
   
-  singleProduct(){
-   this.router.navigate(['/product-detail',1])
+  filter(query: string) {
+    let q = query.toLowerCase();
+    this.products = this.filteredProduct;
+    this.products = (query) ?
+      this.products.filter(p => p.title.toLowerCase().includes(q)) : this.filteredProduct;
+    }
+
+    clearQuery(){
+      this.router.navigate(['/category'])
+  }
+  
+  getCategories(){
+  this.productService.getCategory().subscribe(p=>{this.categories=p});
   }
 
   addCart(){
    
+  }
+
+  private applyFilter() { 
+ 
+    this.products = (this.category && this.filteredProduct) ? 
+    this.filteredProduct.filter(p => p.category == this.category.toLowerCase()) : 
+    this.filteredProduct;
   }
 
 }

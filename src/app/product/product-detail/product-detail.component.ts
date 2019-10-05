@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ProductService } from 'src/app/Service/product.service';
+import 'rxjs/add/operator/take'; 
 declare var $:any;
 @Component({
   selector: 'app-product-detail',
@@ -9,13 +11,21 @@ declare var $:any;
 export class ProductDetailComponent implements OnInit {
   
   productId
-
-  constructor(private route:ActivatedRoute) { }
+  id
+  product
+  constructor(private route:ActivatedRoute,private productService:ProductService) { }
 
   ngOnInit() {
+
+    this.id= this.route.snapshot.paramMap.get('id');
     
-   this.productId= this.route.snapshot.paramMap.get('id');
+    this.productService.getAll().snapshotChanges().take(1).
+    subscribe(p=>{
+      this.productService.get(p[this.id].key).valueChanges()
+      .subscribe(p=>{this.product=p
+    console.log(this.product)})})
     var best_product_slider = $('.best_product_slider');
+
     if (best_product_slider.length) {
       best_product_slider.owlCarousel({
         items: 4,

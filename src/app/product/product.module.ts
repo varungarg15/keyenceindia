@@ -7,6 +7,7 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { CoreModule } from '../core/core.module';
 import { ProductRoutingModule } from './product-routing.module';
 import { SingleProductComponent } from './category/single-product/single-product.component';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 @NgModule({
   declarations: [ProductComponent,CategoryComponent,ProductDetailComponent, SingleProductComponent],
@@ -14,6 +15,7 @@ import { SingleProductComponent } from './category/single-product/single-product
     ProductRoutingModule,
     CommonModule,
     RouterModule,
+    AngularFireDatabaseModule,
     CoreModule
   ],schemas:[NO_ERRORS_SCHEMA],exports:[SingleProductComponent]
 })

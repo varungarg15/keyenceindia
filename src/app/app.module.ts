@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module';
 import { ProductModule } from './product/product.module';
 import { ShoppingModule } from './shopping/shopping.module';
 import { environment } from 'src/environments/environment';
+import { AngularFireModule } from '@angular/fire';
 // import {FirebaseUIModule} from 'firebaseui-angular';
 // import * as firebase from 'firebase/app';
 // import * as firebaseui from 'firebaseui';
@@ -29,6 +30,7 @@ import { environment } from 'src/environments/environment';
     AuthModule,
     ProductModule,
     ShoppingModule,
+    AngularFireModule
   ],
   providers: [],
   bootstrap: [AppComponent],
