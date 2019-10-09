@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductService } from './../Service/product.service';
 declare var $:any;
 @Component({
   selector: 'app-homepage',
@@ -7,12 +8,15 @@ declare var $:any;
 })
 export class HomepageComponent implements OnInit {
   
-  products=[1,2,3,4,5,6,7,8]
+  products;
 
-  cars=[1,23,4,5]
-  constructor() { }
+  
+  constructor(private productService:ProductService) { }
   
   ngOnInit() {
+    this.productService.getAll().valueChanges().subscribe(p=>{
+      this.products=p;
+    })
     var product_list_slider = $('.product_list_slider');
     if (product_list_slider.length) {
       product_list_slider.owlCarousel({

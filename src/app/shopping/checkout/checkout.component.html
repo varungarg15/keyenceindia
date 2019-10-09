@@ -7,7 +7,7 @@
         <div class="col-lg-8">
           <div class="breadcrumb_iner">
             <div class="breadcrumb_iner_item">
-              <h2>Producta Checkout</h2>
+              <h2>Product Checkout</h2>
               <p>Home <span>-</span> Shop Single</p>
             </div>
           </div>
@@ -45,12 +45,9 @@
                 <span class="placeholder" data-placeholder="Email Address"></span>
               </div>
               <div class="col-md-12 form-group p_star">
-                <select class="country_select">
-                  <option value="1">Country</option>
-                  <option value="2">Country</option>
-                  <option value="4">Country</option>
-                </select>
-              </div>
+                  <input type="text" class="form-control" id="country" name="country" />
+                  <span class="placeholder" data-placeholder="Country"></span>
+                </div>
               <div class="col-md-12 form-group p_star">
                 <input type="text" class="form-control" id="add1" name="add1" />
                 <span class="placeholder" data-placeholder="Address line 01"></span>
@@ -63,27 +60,20 @@
                 <input type="text" class="form-control" id="city" name="city" />
                 <span class="placeholder" data-placeholder="Town/City"></span>
               </div>
-              <div class="col-md-12 form-group p_star">
-                <select class="country_select">
-                  <option value="1">District</option>
-                  <option value="2">District</option>
-                  <option value="4">District</option>
-                </select>
-              </div>
               <div class="col-md-12 form-group">
                 <input type="text" class="form-control" id="zip" name="zip" placeholder="Postcode/ZIP" />
               </div>
               <div class="col-md-12 form-group">
-                <div class="creat_account">
+                <!-- <div class="creat_account">
                   <input type="checkbox" id="f-option2" name="selector" />
                   <label for="f-option2">Create an account?</label>
-                </div>
+                </div> -->
               </div>
               <div class="col-md-12 form-group">
                 <div class="creat_account">
                   <h3>Shipping Details</h3>
-                  <input type="checkbox" id="f-option3" name="selector" />
-                  <label for="f-option3">Ship to a different address?</label>
+                  <!-- <input type="checkbox" id="f-option3" name="selector" />
+                  <label for="f-option3">Ship to a different address?</label> -->
                 </div>
                 <textarea class="form-control" name="message" id="message" rows="1"
                   placeholder="Order Notes"></textarea>
@@ -99,48 +89,26 @@
                     <span>Total</span>
                   </a>
                 </li>
-                <li>
-                  <a href="#">Fresh Blackberry
-                    <span class="middle">x 02</span>
-                    <span class="last">$720.00</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">Fresh Tomatoes
-                    <span class="middle">x 02</span>
-                    <span class="last">$720.00</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">Fresh Brocoli
-                    <span class="middle">x 02</span>
-                    <span class="last">$720.00</span>
+                <li *ngFor="let c of objectKey">
+                  <a href="#">{{cart[c].product.title}}
+                    <span class="middle">x {{cart[c].quantity}}</span>
+                    <span class="last">${{cart[c].product.price * cart[c].quantity}}</span>
                   </a>
                 </li>
               </ul>
               <ul class="list list_2">
                 <li>
-                  <a href="#">Subtotal
-                    <span>$2160.00</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">Shipping
-                    <span>Flat rate: $50.00</span>
-                  </a>
-                </li>
-                <li>
                   <a href="#">Total
-                    <span>$2210.00</span>
+                    <span>$ {{getTotalPrice()}}</span>
                   </a>
-                </li>
+               
               </ul>
               <div class="creat_account">
                 <input type="checkbox" id="f-option4" name="selector" />
                 <label for="f-option4">I’ve read and accept the </label>
-                <a href="#">terms & conditions*</a>
+                <a href="#"> terms & conditions*</a>
               </div>
-              <a class="btn_3" routerLink="/confirmation">Confirm</a>
+              <a class="btn_3" (click)="orders()">Confirm</a>
             </div>
           </div>
         </div>

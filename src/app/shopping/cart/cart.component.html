@@ -22,7 +22,7 @@
         <div class="table-responsive">
           <table class="table">
             <thead>
-              <tr>
+              <tr >
                 <th scope="col">Product</th>
                 <th scope="col">Price</th>
                 <th scope="col">Quantity</th>
@@ -30,30 +30,35 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let product of products">
-                <td>
-                  <div class="media">
-                    <div class="d-flex">
-                      <img src="assets/img/product/single-product/cart-1.jpg" alt="" />
+
+              <tr *ngFor="let c of objectKey">
+                <!-- <div *ngIf="cart[c].quantity"> -->
+                  <td >
+                    <div class="media">
+                      <div class="d-flex">
+                        <img src="assets/img/product/single-product/cart-1.jpg" alt="" />
+                      </div>
+                      <div class="media-body">
+                        <p>{{cart[c].product.title}}</p>
+                      </div>
                     </div>
-                    <div class="media-body">
-                      <p>Minimalistic shop for multipurpose use</p>
+                  </td>
+                  <td >
+                    <h5>$ {{cart[c].product.price}}</h5>
+                  </td>
+                  <td >
+                    <div  class="product_count">
+                      <!-- <span class="input-number-decrement"  (click)="removeFromCart(cart[c].product,c)"> <i class="ti-angle-down"></i></span> -->
+                      <!-- <input readonly class="input-number" type="text" value="{{cart[c].quantity}}" >
+                       -->
+                       {{cart[c].quantity}}
+                      <!-- <span class="input-number-increment" (click)="addToCart(cart[c].product,c)"> <i class="ti-angle-up"></i></span> -->
                     </div>
-                  </div>
-                </td>
-                <td>
-                  <h5>$360.00</h5>
-                </td>
-                <td>
-                  <div class="product_count">
-                    <span class="input-number-decrement"> <i class="ti-angle-down"></i></span>
-                    <input class="input-number" type="text" value="1" min="0" max="10">
-                    <span class="input-number-increment"> <i class="ti-angle-up"></i></span>
-                  </div>
-                </td>
-                <td>
-                  <h5>$720.00</h5>
-                </td>
+                  </td>
+                  <td >
+                    <h5>$ {{cart[c].quantity * cart[c].product.price}}</h5>
+                  </td>
+                <!-- </div> -->
               </tr>
               <tr>
                 <td></td>
@@ -62,13 +67,13 @@
                   <h5>Subtotal</h5>
                 </td>
                 <td>
-                  <h5>$2160.00</h5>
+                  <h5>$ {{getTotalPrice()}}</h5>
                 </td>
               </tr>
             </tbody>
           </table>
           <div class="checkout_btn_inner float-right">
-            <a class="btn_1" routerLink="/category">Continue Shopping</a>
+            <a class="btn_1" routerLink="/category">Continue Shopping</a> &nbsp; &nbsp;
             <a class="btn_1 checkout_btn_1" routerLink="/checkout">Proceed to checkout</a>
           </div>
         </div>

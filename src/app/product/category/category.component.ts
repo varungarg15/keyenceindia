@@ -3,7 +3,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ProductService } from 'src/app/Service/product.service';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/take';
+import { CartService } from './../../Service/cart.service';
 declare var $:any;
+
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
@@ -16,8 +18,10 @@ export class CategoryComponent implements OnInit {
   filteredProduct;
   categories;
   category;
+  p: number = 1;
   
-  constructor(public productService:ProductService,private route:ActivatedRoute,private router:Router) {
+  constructor(public productService:ProductService,
+    private route:ActivatedRoute,private router:Router) {
   }
 
   ngOnInit() {
@@ -79,18 +83,15 @@ export class CategoryComponent implements OnInit {
 
     clearQuery(){
       this.router.navigate(['/category'])
-  }
+     }
   
   getCategories(){
   this.productService.getCategory().subscribe(p=>{this.categories=p});
   }
 
-  addCart(){
-   
-  }
+  
 
   private applyFilter() { 
- 
     this.products = (this.category && this.filteredProduct) ? 
     this.filteredProduct.filter(p => p.category == this.category.toLowerCase()) : 
     this.filteredProduct;

@@ -16,6 +16,7 @@ import { AngularFireModule } from '@angular/fire';
 // currently there is a bug while building the app with --prod
 // - https://github.com/RaphaelJenni/FirebaseUI-Angular/issues/76
 // the plugin exposes the two libraries as well. You can use those:
+import { NgxUiLoaderModule } from  'ngx-ui-loader';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { AngularFireModule } from '@angular/fire';
     AuthModule,
     ProductModule,
     ShoppingModule,
-    AngularFireModule
+    AngularFireModule,
+    NgxUiLoaderModule
   ],
   providers: [],
   bootstrap: [AppComponent],

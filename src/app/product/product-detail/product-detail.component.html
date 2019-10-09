@@ -51,13 +51,15 @@
               Two fruitful let days signs sea together all land fly subdue
             </p>
             <div class="card_area d-flex justify-content-between align-items-center">
-              <div class="product_count">
-                <span class="inumber-decrement"> <i class="ti-minus"></i></span>
-                <input class="input-number" type="text" value="1" min="0" max="10">
-                <span class="number-increment"> <i class="ti-plus"></i></span>
-              </div>
-              <a href="#" class="btn_3">add to cart</a>
-              <a href="#" class="like_us"> <i class="ti-heart"></i> </a>
+              <a *ngIf="getQuantity(product) == null || getQuantity(product) == 0; else value" (click)="addToCart()" class="btn_3">add to cart</a>
+              <ng-template #value>
+                <div  class="product_count">
+                    <span (click)="removeFromCart()" class="inumber-decrement"> <i class="ti-minus"></i></span>
+                    &nbsp; &nbsp;{{getQuantity(product)}} &nbsp; &nbsp;
+                    <span (click)="addToCart()" class="number-increment"> <i class="ti-plus"></i></span>
+                  </div>
+              </ng-template>  
+              <!-- <a  class="like_us"> <i class="ti-heart"></i> </a> -->
             </div>
           </div>
         </div>

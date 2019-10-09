@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from 'src/app/Service/product.service';
 import 'rxjs/add/operator/take'; 
+import { CartService } from 'src/app/Service/cart.service';
+import { Subscription } from 'rxjs';
+import { ShoppingCart } from 'src/app/Models/shopping-cart';
 declare var $:any;
 @Component({
   selector: 'app-product-detail',
@@ -13,17 +16,31 @@ export class ProductDetailComponent implements OnInit {
   productId
   id
   product
-  constructor(private route:ActivatedRoute,private productService:ProductService) { }
+  cart:ShoppingCart
+  subscription:Subscription;
 
-  ngOnInit() {
+  constructor(private route:ActivatedRoute,private productService:ProductService,
+    private cartService:CartService) { }
+
+  async ngOnInit() {
 
     this.id= this.route.snapshot.paramMap.get('id');
     
     this.productService.getAll().snapshotChanges().take(1).
-    subscribe(p=>{
+    subscribe(p=>{ this.productId=p[this.id].key
       this.productService.get(p[this.id].key).valueChanges()
       .subscribe(p=>{this.product=p
     console.log(this.product)})})
+
+    this.subscription = (await this.cartService.getCart()).valueChanges().subscribe(
+      cart => {
+        this.cart = cart;
+        console.log(this.cart)
+       //  console.log(this.cart.getQuantity(this.product));
+       //  this.quantity=cart.getQuantity(this.product);
+       // console.log( cart.totalItemsCount+ " "+cart.totalPrice)
+       });
+
     var best_product_slider = $('.best_product_slider');
 
     if (best_product_slider.length) {
@@ -61,7 +78,29 @@ export class ProductDetailComponent implements OnInit {
       });
     }
 
-
   }
+
+  getQuantity(product) {
+    if (!this.cart) return null;
+    if (this.cart && this.cart.items && this.productId) {
+      let item = this.cart.items[this.productId]
+      // console.log(this.cart.items[this.key]+' '+product.title)
+      // console.log(this.cart.items[product.$key])
+      return item ? item.quantity : null;
+    }
+  }
+
+  addToCart(){
+    //  console.log(this.product)
+      console.log(this.product+' '+this.productId)
+    this.cartService.addToCart(this.product,this.productId)
+    // console.log(this.cart)
+   }
+
+   removeFromCart(){
+    //  console.log(product)
+    this.cartService.removeFromCart(this.product,this.productId)
+    // console.log(this.cart)
+   }
 
 }

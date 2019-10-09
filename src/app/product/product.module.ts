@@ -8,6 +8,7 @@ import { CoreModule } from '../core/core.module';
 import { ProductRoutingModule } from './product-routing.module';
 import { SingleProductComponent } from './category/single-product/single-product.component';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   declarations: [ProductComponent,CategoryComponent,ProductDetailComponent, SingleProductComponent],
@@ -16,7 +17,8 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
     CommonModule,
     RouterModule,
     AngularFireDatabaseModule,
-    CoreModule
+    CoreModule,
+    NgxPaginationModule
   ],schemas:[NO_ERRORS_SCHEMA],exports:[SingleProductComponent]
 })
 export class ProductModule { }
