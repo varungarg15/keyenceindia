@@ -25,7 +25,7 @@ export class CartComponent implements OnInit {
   }
 
   trackByFn(index,item){
-    return index
+    return index;
   }
 
   getQuantity(productId) {

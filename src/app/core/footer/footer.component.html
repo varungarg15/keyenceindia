@@ -6,7 +6,10 @@
                 <div class="single_footer_part">
                     <h4>Top Products</h4>
                     <ul class="list-unstyled">
-                        <li *ngFor="let c of categories;let i=index ; trackby:trackByFn"><a *ngIf="4>i" routerLink="/category" [queryParams]="{category:c.name}">{{c.name}}</a></li>
+                        <div *ngFor="let c of categories;let i=index; trackBy:trackByFn">
+                            <li ><a *ngIf="4>i" routerLink="/category"
+                                 [queryParams]="{category:c.name}">{{c.name}}</a></li>
+                        </div>
                     </ul>
                 </div>
             </div>
@@ -27,7 +30,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-sm-6 col-lg-4">
+            <div class="col-sm-6 col-lg-3">
                 <div class="single_footer_part">
                     <h4>Newsletter</h4>
                     <p>Heaven fruitful doesn't over lesser in days. Appear creeping

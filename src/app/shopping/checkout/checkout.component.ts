@@ -17,8 +17,9 @@ export class CheckoutComponent implements OnInit {
   cart;
   objectKey;
   userId;
-  shipping;
-
+  shipping={first_name:'',last_name:'',phone:'',country:'',zip:'',
+            email:'',address:'',add1:'',add2:'',city:''};
+  
   constructor(private cartService:CartService,private productService:ProductService,
       private router:Router,private orderService:OrderService,private authService:AuthService) { }
 
@@ -44,14 +45,15 @@ export class CheckoutComponent implements OnInit {
         
         this.userId=localStorage.getItem('uid')
         let datePlaced = new Date().getTime();
-
+        
         let order = {
           userId:this.userId,
           datePlaced:datePlaced,
+          shipping: this.shipping,
           items:{
             cart:this.cart,
             totalPrice:this.getTotalPrice()
-          }
+          },
         };
         console.log(order)
         let result = await this.orderService.placeOrder(order);

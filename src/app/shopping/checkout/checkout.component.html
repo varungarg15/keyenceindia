@@ -24,61 +24,50 @@
         <div class="row">
           <div class="col-lg-8">
             <h3>Billing Details</h3>
-            <form class="row contact_form" action="#" method="post" novalidate="novalidate">
+            <form class="row contact_form" (ngSubmit)="onSave(f.value)" #f="ngForm">
               <div class="col-md-6 form-group p_star">
-                <input type="text" class="form-control" id="first" name="name" />
+                <input type="text" class="form-control" id="first" name="firrst_name" [(ngModel)]="shipping.first_name"  required />
                 <span class="placeholder" data-placeholder="First name"></span>
               </div>
               <div class="col-md-6 form-group p_star">
-                <input type="text" class="form-control" id="last" name="name" />
+                <input type="text" class="form-control" id="last" name="last_name" [(ngModel)]="shipping.last_name"  required />
                 <span class="placeholder" data-placeholder="Last name"></span>
               </div>
-              <div class="col-md-12 form-group">
-                <input type="text" class="form-control" id="company" name="company" placeholder="Company name" />
+              <div class="col-md-6 form-group p_star">
+                <input type="number" maxlength="10" minlength="10" class="form-control" id="number" name="number" [(ngModel)]="shipping.phone" required />
+                <span class="placeholder" data-placeholder="Phone number" ></span>
               </div>
               <div class="col-md-6 form-group p_star">
-                <input type="text" class="form-control" id="number" name="number" />
-                <span class="placeholder" data-placeholder="Phone number"></span>
-              </div>
-              <div class="col-md-6 form-group p_star">
-                <input type="text" class="form-control" id="email" name="compemailany" />
-                <span class="placeholder" data-placeholder="Email Address"></span>
+                <input type="email" class="form-control" id="email" name="compemailany" [(ngModel)]="shipping.address" required />
+                <span class="placeholder" data-placeholder="Email Address" ></span>
               </div>
               <div class="col-md-12 form-group p_star">
-                  <input type="text" class="form-control" id="country" name="country" />
+                  <input type="text" class="form-control" id="country" name="country" [(ngModel)]="shipping.country" required />
                   <span class="placeholder" data-placeholder="Country"></span>
                 </div>
               <div class="col-md-12 form-group p_star">
-                <input type="text" class="form-control" id="add1" name="add1" />
+                <input type="text" class="form-control" id="add1" name="add1" [(ngModel)]="shipping.add1" required />
                 <span class="placeholder" data-placeholder="Address line 01"></span>
               </div>
               <div class="col-md-12 form-group p_star">
-                <input type="text" class="form-control" id="add2" name="add2" />
+                <input type="text" class="form-control" id="add2" name="add2" [(ngModel)]="shipping.add2" required />
                 <span class="placeholder" data-placeholder="Address line 02"></span>
               </div>
               <div class="col-md-12 form-group p_star">
-                <input type="text" class="form-control" id="city" name="city" />
+                <input type="text" class="form-control" id="city" name="city" [(ngModel)]="shipping.city" required />
                 <span class="placeholder" data-placeholder="Town/City"></span>
               </div>
               <div class="col-md-12 form-group">
-                <input type="text" class="form-control" id="zip" name="zip" placeholder="Postcode/ZIP" />
+                <input type="number" maxlength="6" class="form-control" id="zip" name="zip" placeholder="Postcode/ZIP" [(ngModel)]="shipping.zip"  required />
               </div>
               <div class="col-md-12 form-group">
                 <!-- <div class="creat_account">
-                  <input type="checkbox" id="f-option2" name="selector" />
+                  <input type="checkbox" id="f-option2" name="selector"  required />
                   <label for="f-option2">Create an account?</label>
                 </div> -->
               </div>
-              <div class="col-md-12 form-group">
-                <div class="creat_account">
-                  <h3>Shipping Details</h3>
-                  <!-- <input type="checkbox" id="f-option3" name="selector" />
-                  <label for="f-option3">Ship to a different address?</label> -->
-                </div>
-                <textarea class="form-control" name="message" id="message" rows="1"
-                  placeholder="Order Notes"></textarea>
-              </div>
             </form>
+          
           </div>
           <div class="col-lg-4">
             <div class="order_box">
@@ -102,14 +91,16 @@
                     <span>$ {{getTotalPrice()}}</span>
                   </a>
                
-              </ul>
-              <div class="creat_account">
-                <input type="checkbox" id="f-option4" name="selector" />
+              </ul> <br>
+              <!-- <div class="creat_account">
+                <input type="checkbox" id="f-option4" name="selector"  required />
                 <label for="f-option4">I’ve read and accept the </label>
                 <a href="#"> terms & conditions*</a>
-              </div>
-              <a class="btn_3" (click)="orders()">Confirm</a>
+              </div> -->
+
+              <a *ngIf="shipping.zip!==''" class="btn_3" (click)="orders()">Confirm</a>
             </div>
+          
           </div>
         </div>
       </div>
