@@ -7,6 +7,7 @@ import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { CoreModule } from '../core/core.module';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [ShoppingComponent,CartComponent,CheckoutComponent,ConfirmationComponent],
@@ -14,7 +15,8 @@ import { CoreModule } from '../core/core.module';
     CommonModule,
     ShopingRoutingModule,
     RouterModule,
-    CoreModule
+    CoreModule,
+    NgxPaginationModule
   ]
 })
 export class ShoppingModule { }

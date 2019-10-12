@@ -6,8 +6,10 @@
             <div class="col-lg-8">
                 <div class="breadcrumb_iner"> 
                     <div class="breadcrumb_iner_item"> <br> <br>
-                            <firebase-ui (signInSuccessWithAuthResult)="successCallback($event)"
-                            (signInFailure)="errorCallback($event)"></firebase-ui>
+                        <h2>Login</h2>
+                        <p>Home <span>-</span> Login</p>
+                            <!-- <firebase-ui (signInSuccessWithAuthResult)="successCallback($event)" -->
+                            <!-- (signInFailure)="errorCallback($event)"></firebase-ui> -->
                     </div>
                 </div>
             </div>
@@ -17,8 +19,8 @@
 <!-- breadcrumb start-->
 <br><br>
 <!--================login_part Area =================-->
-<!-- <firebase-ui (signInSuccessWithAuthResult)="successCallback($event)"
-             (signInFailure)="errorCallback($event)"></firebase-ui> -->
+<firebase-ui (signInSuccessWithAuthResult)="successCallback($event)"
+             (signInFailure)="errorCallback($event)"></firebase-ui>
 <!--================login_part end =================-->
 
 <app-footer></app-footer>

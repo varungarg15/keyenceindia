@@ -12,6 +12,7 @@ export class AgmComponent implements OnInit {
 
   ngOnInit() {
   }
+  
   zoom: number = 11;
   
   // initial center position for the map

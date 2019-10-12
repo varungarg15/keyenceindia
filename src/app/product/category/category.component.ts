@@ -89,11 +89,13 @@ export class CategoryComponent implements OnInit {
   this.productService.getCategory().subscribe(p=>{this.categories=p});
   }
 
-  
+  trackByFn(index,item){
+    return index;
+  }
 
   private applyFilter() { 
     this.products = (this.category && this.filteredProduct) ? 
-    this.filteredProduct.filter(p => p.category == this.category.toLowerCase()) : 
+    this.filteredProduct.filter(p => p.category.toLowerCase() == this.category.toLowerCase()) : 
     this.filteredProduct;
   }
 

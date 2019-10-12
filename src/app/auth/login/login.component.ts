@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FirebaseUISignInSuccessWithAuthResult, FirebaseUISignInFailure } from 'firebaseui-angular';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -10,11 +11,15 @@ import { AngularFireAuth } from '@angular/fire/auth';
   encapsulation:ViewEncapsulation.None
 })
 export class LoginComponent implements OnInit {
+  subscription:Subscription;
+  returnUrl 
 
-  constructor(private router:Router,private afAuth: AngularFireAuth,private route:ActivatedRoute){}
-   returnUrl 
+  constructor(private router:Router,private afAuth: AngularFireAuth,
+    private route:ActivatedRoute){}
+
+
   ngOnInit(){
-    this.afAuth.authState.subscribe(this.firebaseAuthChangeListener);
+   this.subscription= this.afAuth.authState.subscribe(this.firebaseAuthChangeListener);
     this.returnUrl = this.route.snapshot.queryParamMap.get('returnUrl')
   }
 
@@ -40,6 +45,10 @@ export class LoginComponent implements OnInit {
 
 errorCallback(data: FirebaseUISignInFailure) {
   console.warn('errorCallback', data);
+}
+
+ngOnDestroy(){
+  this.subscription.unsubscribe();
 }
 
 }

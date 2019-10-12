@@ -24,6 +24,10 @@ export class CartComponent implements OnInit {
   console.log(cart) }})
   }
 
+  trackByFn(index,item){
+    return index
+  }
+
   getQuantity(productId) {
     console.log(productId+' '+this.cart)
     if (!this.cart) return null;

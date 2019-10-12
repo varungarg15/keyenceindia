@@ -9,7 +9,7 @@ import { AuthGuard } from '../Gaurd/auth.guard';
 export const routes: Routes = [
   {path:'cart',component:CartComponent},
   {path:'checkout',component:CheckoutComponent,canActivate:[AuthGuard]},
-  {path:'confirmation',component:ConfirmationComponent,canActivate:[AuthGuard]}
+  {path:'order',component:ConfirmationComponent,canActivate:[AuthGuard]}
 ];
 
 @NgModule({

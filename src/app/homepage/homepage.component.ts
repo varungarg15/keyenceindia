@@ -118,4 +118,8 @@ export class HomepageComponent implements OnInit {
   
   }
 
+  trackByFn(index, item) {
+    return index; // or item.id
+  }
+
 }

@@ -147,14 +147,14 @@
                 <div class="product_list_slider owl-carousel">
                     <div class="single_product_list_slider">
                         <div class="row align-items-center justify-content-between">
-                            <div class="col-lg-3 col-sm-6" *ngFor="let product of products; let i=index">
+                            <div class="col-lg-3 col-sm-6" *ngFor="let product of products; let i=index; trackBy: trackByFn">
                                 <app-single-product *ngIf="8>i || i==0" [product]="product"></app-single-product>
                             </div>
                         </div>
                     </div>
                     <div class="single_product_list_slider">
                         <div class="row align-items-center justify-content-between">
-                            <div class="col-lg-3 col-sm-6" *ngFor="let product of products; let i=index">
+                            <div class="col-lg-3 col-sm-6" *ngFor="let product of products; let i=index; trackBy: trackByFn">
                                 <app-single-product *ngIf="i>=8 && 16>i" [product]="product"></app-single-product>
                             </div>
                         </div>

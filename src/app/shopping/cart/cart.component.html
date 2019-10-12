@@ -31,7 +31,7 @@
             </thead>
             <tbody>
 
-              <tr *ngFor="let c of objectKey">
+              <tr *ngFor="let c of objectKey; trackBy:trackByFn">
                 <!-- <div *ngIf="cart[c].quantity"> -->
                   <td >
                     <div class="media">

@@ -56,7 +56,7 @@ export class CheckoutComponent implements OnInit {
         console.log(order)
         let result = await this.orderService.placeOrder(order);
          console.log(result)
-         this.router.navigate(['/confirmation']);
+         this.router.navigate(['/order']);
       }
 
 
