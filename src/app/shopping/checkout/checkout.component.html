@@ -75,23 +75,24 @@
               <ul class="list">
                 <li>
                   <a href="#">Product
-                    <span>Total</span>
+                    <!-- <span>Total</span> -->
                   </a>
                 </li>
                 <li *ngFor="let c of objectKey">
                   <a href="#">{{cart[c].product.title}}
                     <span class="middle">x {{cart[c].quantity}}</span>
-                    <span class="last">${{cart[c].product.price * cart[c].quantity}}</span>
+                    <!-- <span class="last">${{cart[c].product.price * cart[c].quantity}}</span> -->
                   </a>
                 </li>
               </ul>
-              <ul class="list list_2">
+              <!-- <ul class="list list_2">
                 <li>
                   <a href="#">Total
                     <span>$ {{getTotalPrice()}}</span>
                   </a>
                
-              </ul> <br>
+              </ul>  -->
+              <br>
               <!-- <div class="creat_account">
                 <input type="checkbox" id="f-option4" name="selector"  required />
                 <label for="f-option4">I’ve read and accept the </label>

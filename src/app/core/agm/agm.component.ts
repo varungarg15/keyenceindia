@@ -13,11 +13,11 @@ export class AgmComponent implements OnInit {
   ngOnInit() {
   }
   
-  zoom: number = 11;
+  zoom: number = 19;
   
   // initial center position for the map
-  lat: number = 30.3165;
-  lng: number = 78.0322;
+  lat: number = 27.8860125;
+  lng: number = 78.0794066;
   name="Dit University"
   clickedMarker(label: string, index: number) {
     console.log(`clicked the marker: ${label || index}`)

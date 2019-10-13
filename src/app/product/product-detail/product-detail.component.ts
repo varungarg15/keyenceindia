@@ -20,11 +20,47 @@ export class ProductDetailComponent implements OnInit {
   subscription:Subscription;
 
   constructor(private route:ActivatedRoute,private productService:ProductService,
-    private cartService:CartService) { }
+    private cartService:CartService) {
+      var best_product_slider = $('.best_product_slider');
+      if (best_product_slider.length) {
+        best_product_slider.owlCarousel({
+          items: 4,
+          loop: true,
+          dots: false,
+          autoplay: true,
+          autoplayHoverPause: true,
+          autoplayTimeout: 5000,
+          nav: true,
+          navText: ["next", "previous"],
+          responsive: {
+            0: {
+              margin: 15,
+              items: 1,
+              nav: false
+            },
+            576: {
+              margin: 15,
+              items: 2,
+              nav: false
+            },
+            768: {
+              margin: 30,
+              items: 3,
+              nav: true
+            },
+            991: {
+              margin: 30,
+              items: 4,
+              nav: true
+            }
+          }
+        });
+      }
+     }
 
   async ngOnInit() {
 
-    this.id= this.route.snapshot.paramMap.get('id');
+    this.id = this.route.snapshot.paramMap.get('id');
     
     this.productService.getAll().snapshotChanges().take(1).
     subscribe(p=>{ this.productId=p[this.id].key
@@ -41,44 +77,9 @@ export class ProductDetailComponent implements OnInit {
        // console.log( cart.totalItemsCount+ " "+cart.totalPrice)
        });
 
-    var best_product_slider = $('.best_product_slider');
+     }
 
-    if (best_product_slider.length) {
-      best_product_slider.owlCarousel({
-        items: 4,
-        loop: true,
-        dots: false,
-        autoplay: true,
-        autoplayHoverPause: true,
-        autoplayTimeout: 5000,
-        nav: true,
-        navText: ["next", "previous"],
-        responsive: {
-          0: {
-            margin: 15,
-            items: 1,
-            nav: false
-          },
-          576: {
-            margin: 15,
-            items: 2,
-            nav: false
-          },
-          768: {
-            margin: 30,
-            items: 3,
-            nav: true
-          },
-          991: {
-            margin: 30,
-            items: 4,
-            nav: true
-          }
-        }
-      });
-    }
-
-  }
+  
 
   getQuantity(product) {
     if (!this.cart) return null;
@@ -101,6 +102,10 @@ export class ProductDetailComponent implements OnInit {
     //  console.log(product)
     this.cartService.removeFromCart(this.product,this.productId)
     // console.log(this.cart)
+   }
+
+   ngOnDestroy(){
+     this.subscription.unsubscribe();
    }
 
 }

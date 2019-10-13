@@ -94,7 +94,7 @@
                 <tr>
                   <th scope="col" colspan="2">Product</th>
                   <th scope="col">Quantity</th>
-                  <th scope="col">Total</th>
+                  <!-- <th scope="col">Total</th> -->
                 </tr>
               </thead>
               <tbody>
@@ -102,13 +102,13 @@
                  
                     <th colspan="2"><span>{{order.items.cart[product].product.title}}</span></th>
                     <th>x {{order.items.cart[product].quantity}}</th>
-                    <th> <span>$ {{order.items.cart[product].quantity * order.items.cart[product].product.price}}</span></th>
+                    <!-- <th> <span>$ {{order.items.cart[product].quantity * order.items.cart[product].product.price}}</span></th> -->
                  
                 </tr>
-                <tr>
+                <!-- <tr>
                   <th colspan="3">Total</th>
                   <th> <span>$ {{order.items.totalPrice}}</span></th>
-                </tr>
+                </tr> -->
               </tbody>
             </table>
           </div>

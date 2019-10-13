@@ -3,3 +3,8 @@
     background-color: #FF3368;
     opacity: 1;
 }
+@media (min-width: 991px) {
+    .navbar-brand img{
+        height: 100px;
+    }
+}
