@@ -18,22 +18,30 @@ export class CategoryComponent implements OnInit {
   filteredProduct;
   categories;
   category;
-  p: number = 1;
-  
+  p= 1;
+  keys;
   constructor(public productService:ProductService,
     private route:ActivatedRoute,private router:Router) {
   }
 
   ngOnInit() {
-    this.subscription= this.productService.getAll().valueChanges()
-    .switchMap(products => {
-      this.filteredProduct = products;
-      return this.route.queryParamMap;
+    this.subscription= this.productService.getAll().snapshotChanges()
+    .switchMap(keys => {
+      // console.log(products)
+      this.keys=keys
+    return this.productService.getAll().valueChanges();
     })
-    .subscribe(params => {
-      this.category = params.get('category');
+    .switchMap(products => {
+       for(let p in products){
+         products[p]['key']=this.keys[p].key
+       }
+       console.log(products)
+       this.filteredProduct=products
+      return this.route.queryParamMap
+    }).subscribe(params=>{
+      this.category = params.get('category'); 
       this.applyFilter();      
-    });
+    })
 
   // this.subscription.subscribe(p=>{console.log(p)})
     this.getCategories()
@@ -95,7 +103,10 @@ export class CategoryComponent implements OnInit {
 
   private applyFilter() { 
     this.products = (this.category && this.filteredProduct) ? 
-    this.filteredProduct.filter(p => p.category.toLowerCase() == this.category.toLowerCase()) : 
+    this.filteredProduct.filter(p =>{
+      console.log(p.category.toLowerCase() == this.category.toLowerCase())
+      return p.category.toLowerCase() == this.category.toLowerCase()
+      }) : 
     this.filteredProduct;
   }
 
