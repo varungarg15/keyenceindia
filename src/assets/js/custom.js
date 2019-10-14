@@ -10,8 +10,6 @@
     fixedContentPos: false
   });
 
-
-
   var review = $('.textimonial_iner');
   if (review.length) {
     review.owlCarousel({

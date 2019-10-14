@@ -28,7 +28,7 @@ export class HomepageComponent implements OnInit {
         autoplayHoverPause: true,
         autoplayTimeout: 5000,
         nav: true,
-        navText: ["next", "previous"],
+        navText: ["previous", "next"],
         smartSpeed: 1000,
         responsive: {
           0: {
@@ -65,7 +65,6 @@ export class HomepageComponent implements OnInit {
       autoplayHoverPause: true,
       autoplayTimeout: 5000,
       nav: true,
-      navText: ["next", "previous"],
       smartSpeed: 1000,
       responsive: {
         0: {

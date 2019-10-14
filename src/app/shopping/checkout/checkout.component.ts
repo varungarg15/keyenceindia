@@ -61,6 +61,8 @@ export class CheckoutComponent implements OnInit {
          this.router.navigate(['/order']);
       }
 
-
+    onSave(f){
+      console.log(f)
+    }
 
 }

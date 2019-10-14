@@ -36,7 +36,7 @@
                   <td >
                     <div class="media">
                       <div class="d-flex">
-                        <img src="assets/img/product/single-product/cart-1.jpg" alt="" />
+                        <img height="75px" src="{{cart[c].product.thumbImageUrl}}" alt="" />
                       </div>
                       <div class="media-body">
                         <p>{{cart[c].product.title}}</p>
@@ -74,7 +74,7 @@
           </table>
           <div class="checkout_btn_inner float-right">
             <a class="btn_1" routerLink="/category">Continue Shopping</a> &nbsp; &nbsp;
-            <a class="btn_1 checkout_btn_1" routerLink="/checkout">Proceed to checkout</a>
+            <a *ngIf="total !== 0" class="btn_1 checkout_btn_1" routerLink="/checkout">Proceed to checkout</a>
           </div>
         </div>
       </div></div>

@@ -99,7 +99,7 @@
                 <a href="#"> terms & conditions*</a>
               </div> -->
 
-              <a *ngIf="shipping.zip!==''" class="btn_3" (click)="orders()">Confirm</a>
+              <a [class.inactiveLink]="shipping.zip == '' || shipping.first_name == ''" class="btn_3" (click)="orders()">Confirm</a>
             </div>
           
           </div>

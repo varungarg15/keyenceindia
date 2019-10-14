@@ -2,22 +2,11 @@
         <div  class="single_product_item">
           <div class="single_product_text">
               <div  (click)="singleProduct()">
-                  <img src="assets/img/product/1010.png" alt=""> <br><br>
+                  <img src="{{product.thumbImageUrl}}" alt=""> <br><br>
                   <div style="text-align:center">
                       <h4>{{product.title}}</h4>
-                      <!-- <h3>${{product.price}}</h3> -->
                   </div>
               </div>
-              <!-- <div style="text-align:center" *ngIf="getQuantity(product) == null || getQuantity(product) == 0; else updateQuantity">
-                  <a (click)="addToCart(product)" class="add_cart">+ add to cart</a>
-              </div>
-              <ng-template #updateQuantity>
-                  <a class="add_cart" style="text-align:center">
-                      <span (click)="removeFromCart(product)" class="add_cart">-</span>
-                      &nbsp;&nbsp; {{getQuantity(product)}} &nbsp; &nbsp;
-                      <span (click)="addToCart(product)" class="add_cart">+</span>
-                  </a>  
-                  </ng-template> -->
           </div>
         </div>
     

@@ -78,8 +78,8 @@ export class ProductDetailComponent implements OnInit {
 
   getQuantity(product) {
     if (!this.cart) return null;
-    if (this.cart && this.cart.items && this.productId) {
-      let item = this.cart.items[this.productId]
+    if (this.cart && this.cart.items) {
+      let item = this.cart.items[this.id]
       // console.log(this.cart.items[this.key]+' '+product.title)
       // console.log(this.cart.items[product.$key])
       return item ? item.quantity : null;
@@ -88,14 +88,14 @@ export class ProductDetailComponent implements OnInit {
 
   addToCart(){
     //  console.log(this.product)
-      console.log(this.product+' '+this.productId)
-    this.cartService.addToCart(this.product,this.productId)
+      console.log(this.product+' '+this.id)
+    this.cartService.addToCart(this.product,this.id)
     // console.log(this.cart)
    }
 
    removeFromCart(){
     //  console.log(product)
-    this.cartService.removeFromCart(this.product,this.productId)
+    this.cartService.removeFromCart(this.product,this.id)
     // console.log(this.cart)
    }
 
