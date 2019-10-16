@@ -10,7 +10,8 @@ declare var $:any;
   encapsulation:ViewEncapsulation.None
 })
 export class HeaderComponent implements OnInit {
-
+  
+  
   constructor(public auth:AuthService, private cartService:CartService) { }
   cart
  async ngOnInit() { 

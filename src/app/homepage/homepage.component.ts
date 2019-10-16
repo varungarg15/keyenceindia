@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ProductService } from './../Service/product.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 declare var $:any;
 @Component({
   selector: 'app-homepage',
@@ -10,14 +12,24 @@ declare var $:any;
 export class HomepageComponent implements OnInit {
   
   products;
-
+  subscription:Subscription
+  keys: any;
   
-  constructor(private productService:ProductService) { }
+  constructor(private productService:ProductService, private router:Router, private route:ActivatedRoute) { }
   
   ngOnInit() {
-    this.productService.getAll().valueChanges().subscribe(p=>{
-      this.products=p;
+    this.subscription= this.productService.getAll().snapshotChanges()
+    .switchMap(keys => {
+      this.keys=keys
+      return this.productService.getAll().valueChanges();
     })
+    .subscribe(products => {
+       for(let p in products){
+         products[p]['key']=this.keys[p].key
+       }
+       this.products = products
+    })
+
     var product_list_slider = $('.product_list_slider');
     if (product_list_slider.length) {
       product_list_slider.owlCarousel({
@@ -114,12 +126,10 @@ export class HomepageComponent implements OnInit {
         }
       });
     }
-  
-  
   }
 
   trackByFn(index, item) {
-    return index; // or item.id
+    return index;
   }
 
 }

@@ -50,6 +50,7 @@ export class CheckoutComponent implements OnInit {
           userId:this.userId,
           datePlaced:datePlaced,
           shipping: this.shipping,
+          msg:"You have recieved a new order from"+this.shipping.first_name+" "+this.shipping.last_name,
           items:{
             cart:this.cart,
             totalPrice:this.getTotalPrice()

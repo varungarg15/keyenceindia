@@ -27,7 +27,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
       provider: firebase.auth.FacebookAuthProvider.PROVIDER_ID
     },
     firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-    firebase.auth.GithubAuthProvider.PROVIDER_ID,
+    // firebase.auth.GithubAuthProvider.PROVIDER_ID,
     {
       requireDisplayName: false,
       provider: firebase.auth.EmailAuthProvider.PROVIDER_ID
