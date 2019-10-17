@@ -18,7 +18,7 @@ export class CheckoutComponent implements OnInit {
   objectKey;
   userId;
   shipping={first_name:'',last_name:'',phone:'',country:'',zip:'',
-            email:'',address:'',add1:'',add2:'',city:''};
+            email:'',address:'',city:''};
   
   constructor(private cartService:CartService,private productService:ProductService,
       private router:Router,private orderService:OrderService,private authService:AuthService) { }
@@ -28,8 +28,7 @@ export class CheckoutComponent implements OnInit {
            if(cart){
            this.cart=cart.items
            this.objectKey= Object.keys(cart.items);
-           console.log(this.cart[this.objectKey[0]]['product'])
-           console.log(cart)}
+        }
          })
        }
 
@@ -41,29 +40,57 @@ export class CheckoutComponent implements OnInit {
         return sum;
       }
 
-      async orders(){
-        
+
+       orders(){
         this.userId=localStorage.getItem('uid')
         let datePlaced = new Date().getTime();
-        
-        let order = {
+        var order
+        if(this.userId){
+         order = {
           userId:this.userId,
           datePlaced:datePlaced,
           shipping: this.shipping,
-          msg:"You have recieved a new order from"+this.shipping.first_name+" "+this.shipping.last_name,
           items:{
             cart:this.cart,
             totalPrice:this.getTotalPrice()
           },
-        };
-        console.log(order)
-        let result = await this.orderService.placeOrder(order);
-         console.log(result)
-         this.router.navigate(['/order']);
+        };}
+        if(this.userId){
+          console.log(order)
+          this.orderService.placeOrder(order);
+        }
+        this.notification()
+        this.router.navigate(['/order']);
+        }
+
+      notification(){
+      let message =
+       `You have recieved a new order from ${this.shipping.first_name} <br>`;
+       message += `<b>Mobile</b> -  ${this.shipping.phone} <br>`;
+       message += `<b>Email</b> - ${this.shipping.email} <br>`;
+       message += `<b>Address</b> - ${this.shipping.address}, PIN - ${this.shipping.zip}<br>`;
+       message += `<b>City</b> - ${this.shipping.city}<br>`
+        
+        let toAppend = '';
+          if(this.cart){
+          for (let productId in this.objectKey){
+            toAppend+=`<b>S.No</b>     - ${productId}<br>`;
+            toAppend+=`<b>Product</b>  - ${this.cart[this.objectKey[productId]]['product'].title}<br>`;
+            toAppend+=`<b>Quantity</b> - ${this.cart[this.objectKey[productId]]['quantity']}<br>`
+          }
+        }
+        message+=toAppend; 
+        var notification={
+         title:"You have recieved a new order",
+         body:message,
+         timestamp: new Date().getTime()
+        }
+        this.orderService.placedNotification(notification)
       }
+               
 
     onSave(f){
-      console.log(f)
+      this.orders()
     }
 
 }

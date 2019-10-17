@@ -2,3 +2,14 @@
     pointer-events: none;
     cursor: default;
  }
+ @media (max-width: 576px){
+    .breadcrumb_bg {
+        background-image: none;
+      }
+      .breadcrumb .breadcrumb_iner {
+          margin-top: 50px;
+        height: 175px;
+        width: 100%;
+        display: table;
+      }
+}

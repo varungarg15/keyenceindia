@@ -13,11 +13,22 @@ declare var $:any;
 })
 export class CategoryComponent implements OnInit {
 
+  countries = [
+    {id: 1, name: "United States"},
+    {id: 2, name: "Australia"},
+    {id: 3, name: "Canada"},
+    {id: 4, name: "Brazil"},
+    {id: 5, name: "England"}
+  ];
+  selectedCategory = null;
+
+
   products;
   subscription;
   filteredProduct;
   categories;
   category;
+  categorys;
   p= 1;
   keys;
   constructor(public productService:ProductService,
@@ -81,7 +92,17 @@ export class CategoryComponent implements OnInit {
       });
     }
   }
-  
+
+  nav(value){
+    console.log(value)
+    if(value=="All Category"){
+       console.log(value)
+      this.router.navigate(['/category'])
+    }
+    else
+    this.router.navigate(['/category'],{queryParams:{'category':value}})
+  }
+
   filter(query: string) {
     let q = query.toLowerCase();
     this.products = this.filteredProduct;

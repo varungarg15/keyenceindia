@@ -1,137 +1,88 @@
 <app-header></app-header>
-    <!--================Home Banner Area =================-->
-    <!-- breadcrumb start-->
-    <section class="breadcrumb breadcrumb_bg">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="breadcrumb_iner">
-                        <div class="breadcrumb_iner_item">
-                            <h2>Shop Category</h2>
-                            <p>Home <span>-</span> Shop Category</p>
-                        </div>
+<!--================Home Banner Area =================-->
+<!-- breadcrumb start-->
+<section class="breadcrumb breadcrumb_bg">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="breadcrumb_iner">
+                    <div class="breadcrumb_iner_item">
+                        <h2>Shop Category</h2>
+                        <p>Home <span>-</span> Shop Category</p>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- breadcrumb start-->
+    </div>
+</section>
+<!-- breadcrumb start-->
 
-    <!--================Category Product Area =================-->
-    <section class="cat_product_area section_padding">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="left_sidebar_area">
-                        <aside class="left_widgets p_filter_widgets">
-                            <div class="l_w_title">
-                                <h3>Browse Categories</h3>
-                            </div>
-                            <div class="widgets_inner">
-                                <ul class="list">
-                                    <li routerLink="/category" [class.active]="category == null">
-                                     All Product
-                                    </li>
-                                    <li *ngFor="let c of categories; trackBy:trackByFn" routerLink="/category"
-                                    [queryParams]="{ category: c.name }"
-                                    [class.active]="category === c.name">
-                                        {{c.name}}
-                                        <!-- <span>(250)</span> -->
-                                </ul>
-                            </div>
-                        </aside>
+<!--================Category Product Area =================-->
+<section class="cat_product_area section_padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="left_sidebar_area">
+                    <aside class="left_widgets p_filter_widgets">
+                        <div class="l_w_title">
+                            <h3>Browse Categories</h3>
+                        </div>
+                        <div class="widgets_inner onlydesktop">
+                            <ul class="list">
+                                <li routerLink="/category" [class.active]="category == null">
+                                    All Product
+                                </li>
+                                <li *ngFor="let c of categories; trackBy:trackByFn" routerLink="/category"
+                                    [queryParams]="{ category: c.name }" [class.active]="category === c.name">
+                                    {{c.name}}</li>
+                                    <!-- <span>(250)</span> -->
+                            </ul>
+                        </div>
+                    </aside>
+                   <div class="onlymobile" *ngIf="categories">
+                        <select class="form-control" (change)="nav($event.target.value)">
+                            <option value="">Select a category</option>
+                            <option value="All Category" >All Category</option>                                                          
+                                <option *ngFor="let c of categories"  (click)="nav(c.name)" [ngValue]="c.name">{{c.name}}</option>
+                        </select>
+                   </div>
 
-                       
-                    </div>
                 </div>
-                <div class="col-lg-9">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="product_top_bar d-flex justify-content-between align-items-center">
-                                <div class="single_product_menu">
-                                    <p *ngIf="products"><span>{{products.length}} </span> Product Found</p>
-                                </div>
-                                <div class="single_product_menu d-flex">
-                                    <div class="input-group" (click)="clearQuery()">
-                                        <input #query (keyup)="filter(query.value)" type="text" class="form-control" placeholder="search"
-                                            aria-describedby="inputGroupPrepend">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="inputGroupPrepend"><i
-                                                    class="ti-search"></i></span>
-                                        </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="product_top_bar d-flex justify-content-between align-items-center">
+                            <div class="single_product_menu">
+                                <p *ngIf="products"><span>{{products.length}} </span> Product Found</p>
+                            </div>
+                            <div class="single_product_menu d-flex">
+                                <div class="input-group" (click)="clearQuery()">
+                                    <input #query (keyup)="filter(query.value)" type="text" class="form-control"
+                                        placeholder="search" aria-describedby="inputGroupPrepend">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupPrepend"><i class="ti-search"></i></span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row align-items-center latest_product_inner">
-                        <div class="col-lg-4 col-sm-6" *ngFor="let product of products | paginate: { itemsPerPage: 9, currentPage: p } ; let i=index; trackBy:trackByFn">
-                         <app-single-product [product]="product"  ></app-single-product>
-                        </div>
-                        <div class="col-lg-12">
-                                <pagination-controls (pageChange)="p = $event"></pagination-controls>
-                        </div>
+                </div>
+                <div class="row align-items-center latest_product_inner">
+                    <div class="col-lg-4 col-sm-6" *ngFor="let product of products | paginate: { itemsPerPage: 9, currentPage: p } ; let i=index; trackBy:trackByFn">
+                        <app-single-product [product]="product"></app-single-product>
+                    </div>
+                    <div class="col-lg-12">
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <!--================End Category Product Area =================-->
+    </div>
+</section>
+<!--================End Category Product Area =================-->
 
-    <!-- product_list part start-->
-    <!-- <section class="product_list best_seller section_padding">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-12">
-                        <div class="section_tittle text-center">
-                            <h2>Best Sellers <span>shop</span></h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="row align-items-center justify-content-between">
-                    <div class="col-lg-12">
-                        <div class="best_product_slider owl-carousel">
-                            <div class="single_product_item">
-                                <img src="assets/img/product/bs.jpg" alt="">
-                                <div class="single_product_text">
-                                    <h4>SS Aldrop</h4>
-                                    <h3>${{products[0].price}}</h3>
-                                </div>
-                            </div>
-                            <div class="single_product_item">
-                                <img src="assets/img/product/bs.jpg" alt="">
-                                <div class="single_product_text">
-                                    <h4>White Metal Cabinet handel</h4>
-                                    <h3>${{products[1].price}}</h3>
-                                </div>
-                            </div>
-                            <div class="single_product_item">
-                                <img src="assets/img/product/bs.jpg" alt="">
-                                <div class="single_product_text">
-                                    <h4>Aluminium Fancy Full handel</h4>
-                                    <h3>${{products[2].price}}</h3>
-                                </div>
-                            </div>
-                            <div class="single_product_item">
-                                <img src="assets/img/product/bs.jpg" alt="">
-                                <div class="single_product_text">
-                                    <h4>Mortice Handel Pairs</h4>
-                                    <h3>${{products[3].price}}</h3>
-                                </div>
-                            </div>
-                            <div class="single_product_item">
-                                <img src="assets/img/product/bs.jpg" alt="">
-                                <div class="single_product_text">
-                                    <h4>Door Closer</h4>
-                                    <h3>${{products[4].price}}</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section> -->
-    <!-- product_list part end-->
 
-    <!--::footer_part start::-->
-    <app-footer></app-footer>
+
+<!--::footer_part start::-->
+<app-footer></app-footer>

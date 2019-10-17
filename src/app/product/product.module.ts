@@ -9,15 +9,17 @@ import { ProductRoutingModule } from './product-routing.module';
 import { SingleProductComponent } from './category/single-product/single-product.component';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [ProductComponent,CategoryComponent,ProductDetailComponent, SingleProductComponent],
   imports: [
-    ProductRoutingModule,
+  ProductRoutingModule,
     CommonModule,
     RouterModule,
     AngularFireDatabaseModule,
     CoreModule,
+    FormsModule,
     NgxPaginationModule
   ],schemas:[NO_ERRORS_SCHEMA],exports:[SingleProductComponent]
 })

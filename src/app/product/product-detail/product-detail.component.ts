@@ -64,39 +64,29 @@ export class ProductDetailComponent implements OnInit {
     
       this.productService.get(this.id).valueChanges()
       .subscribe(p=>{this.product=p
-    console.log(this.product)})
-
+    console.log(this.product)
+  })
     this.subscription = (await this.cartService.getCart()).valueChanges().subscribe(
       cart => {
         this.cart = cart;
-        console.log(this.cart)
        });
-
      }
-
-  
 
   getQuantity(product) {
     if (!this.cart) return null;
     if (this.cart && this.cart.items) {
       let item = this.cart.items[this.id]
-      // console.log(this.cart.items[this.key]+' '+product.title)
-      // console.log(this.cart.items[product.$key])
       return item ? item.quantity : null;
     }
   }
 
   addToCart(){
-    //  console.log(this.product)
-      console.log(this.product+' '+this.id)
+    console.log(this.product+' '+this.id)
     this.cartService.addToCart(this.product,this.id)
-    // console.log(this.cart)
    }
 
    removeFromCart(){
-    //  console.log(product)
     this.cartService.removeFromCart(this.product,this.id)
-    // console.log(this.cart)
    }
 
    ngOnDestroy(){
