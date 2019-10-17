@@ -1,6 +1,4 @@
 <app-header></app-header>
-<!--================Home Banner Area =================-->
-<!-- breadcrumb start-->
 <section class="breadcrumb breadcrumb_bg">
   <div class="container">
     <div class="row justify-content-center">
@@ -15,9 +13,6 @@
     </div>
   </div>
 </section>
-<!-- breadcrumb start-->
-
-<!--================Checkout Area =================-->
 <section class="checkout_area padding_top">
     <form class="row contact_form" (ngSubmit)="onSave(f.value)" #f="ngForm">
     <div class="container">
@@ -27,40 +22,29 @@
             <h3>Billing Details</h3>
               <div class="col-md-6 form-group p_star">
                 <input type="text" class="form-control" id="first" name="firrst_name" placeholder="First Name" [(ngModel)]="shipping.first_name"  required />
-                <!-- <span class="placeholder" data-placeholder="First name"></span> -->
               </div>
               <div class="col-md-6 form-group p_star">
                 <input type="text" class="form-control" id="last" name="last_name" placeholder="Last Name" [(ngModel)]="shipping.last_name"  required />
-                <!-- <span class="placeholder" data-placeholder="Last name"></span> -->
               </div>
               <div class="col-md-6 form-group p_star">
-                <input type="text" maxlength="10" minlength="10" class="form-control" placeholder="Phone Number" id="number" name="number" [(ngModel)]="shipping.phone" required />
-                <!-- <span class="placeholder" data-placeholder="Phone number" ></span> -->
+                <input type="tel" maxlength="10" minlength="10" class="form-control" placeholder="Phone Number" id="number" name="number" [(ngModel)]="shipping.phone" required />
               </div>
               <div class="col-md-6 form-group p_star">
                 <input type="email" class="form-control" id="email" name="compemailany" placeholder="Email" [(ngModel)]="shipping.email" required />
-                <!-- <span class="placeholder" data-placeholder="Email Address" ></span> -->
               </div>
               <div class="col-md-12 form-group p_star">
                   <input type="text" class="form-control" id="country" name="country" placeholder="Country" [(ngModel)]="shipping.country" required />
-                  <!-- <span class="placeholder" data-placeholder="Country"></span> -->
                 </div>
               <div class="col-md-12 form-group p_star">
                 <input type="text" class="form-control" id="add1" name="add1" placeholder="Address" [(ngModel)]="shipping.address" required />
-                <!-- <span class="placeholder" data-placeholder="Address line 01"></span> -->
               </div>
               <div class="col-md-12 form-group p_star">
                 <input type="text" class="form-control" id="city" name="city" placeholder="City" [(ngModel)]="shipping.city" required />
-                <!-- <span class="placeholder" data-placeholder="Town/City"></span> -->
               </div>
               <div class="col-md-12 form-group">
                 <input type="text" maxlength="6" class="form-control" id="zip" name="zip" placeholder="Postcode/ZIP" [(ngModel)]="shipping.zip"  required />
               </div>
               <div class="col-md-12 form-group">
-                <!-- <div class="creat_account">
-                  <input type="checkbox" id="f-option2" name="selector"  required />
-                  <label for="f-option2">Create an account?</label>
-                </div> -->
               </div>
               
             </div>
@@ -70,33 +54,17 @@
               <ul class="list">
                 <li>
                   <a href="#">Product
-                    <!-- <span>Total</span> -->
                   </a>
                 </li>
                 <li *ngFor="let c of objectKey">
                   <a href="#">{{cart[c].product.title}}
                     <span class="middle">x {{cart[c].quantity}}</span>
-                    <!-- <span class="last">${{cart[c].product.price * cart[c].quantity}}</span> -->
                   </a>
                 </li>
               </ul>
-              <!-- <ul class="list list_2">
-                <li>
-                  <a href="#">Total
-                    <span>$ {{getTotalPrice()}}</span>
-                  </a>
-                  
-                </ul>  -->
                 <br>
-                <!-- <div class="creat_account">
-                  <input type="checkbox" id="f-option4" name="selector"  required />
-                  <label for="f-option4">I’ve read and accept the </label>
-                  <a href="#"> terms & conditions*</a>
-                </div> -->
-                
                 <button [disabled]="!f.valid" style="text-align:center" class="btn_3" >Confirm</button>
-              </div>
-              
+              </div> 
             </div>
           </div>
         </div>

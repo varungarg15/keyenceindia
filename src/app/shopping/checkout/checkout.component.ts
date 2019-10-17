@@ -45,20 +45,20 @@ export class CheckoutComponent implements OnInit {
         this.userId=localStorage.getItem('uid')
         let datePlaced = new Date().getTime();
         var order
-        if(this.userId){
+       
          order = {
-          userId:this.userId,
+          userId:localStorage.getItem('uid'),
           datePlaced:datePlaced,
           shipping: this.shipping,
           items:{
             cart:this.cart,
             totalPrice:this.getTotalPrice()
           },
-        };}
-        if(this.userId){
+        };
+       
           console.log(order)
           this.orderService.placeOrder(order);
-        }
+        
         this.notification()
         this.router.navigate(['/order']);
         }
@@ -74,7 +74,7 @@ export class CheckoutComponent implements OnInit {
         let toAppend = '';
           if(this.cart){
           for (let productId in this.objectKey){
-            toAppend+=`<b>S.No</b>     - ${productId}<br>`;
+            toAppend+=`<b>S.No</b>     - ${productId+1}<br>`;
             toAppend+=`<b>Product</b>  - ${this.cart[this.objectKey[productId]]['product'].title}<br>`;
             toAppend+=`<b>Quantity</b> - ${this.cart[this.objectKey[productId]]['quantity']}<br>`
           }

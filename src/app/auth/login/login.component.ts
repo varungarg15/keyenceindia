@@ -38,8 +38,8 @@ export class LoginComponent implements OnInit {
 
  successCallback(data: FirebaseUISignInSuccessWithAuthResult) {
   console.log('successCallback', data);
-  this.afAuth.idTokenResult.subscribe(d=>{console.log(d.token)
-  localStorage.setItem('token',d.token)})
+  this.afAuth.idTokenResult.subscribe(d=>{console.log(d.claims.user_id)
+  localStorage.setItem('uid',d.claims.user_id)})
   this.router.navigate([this.returnUrl || '/category']);
 }
 
