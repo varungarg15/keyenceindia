@@ -9,12 +9,14 @@ import { AuthModule } from './auth/auth.module';
 import { ProductModule } from './product/product.module';
 import { ShoppingModule } from './shopping/shopping.module';
 import { AngularFireModule } from '@angular/fire';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomepageComponent,
     ContactComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,
