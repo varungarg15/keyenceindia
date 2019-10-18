@@ -18,10 +18,9 @@ export class CategoryComponent implements OnInit {
   filteredProduct;
   categories;
   category;
-  p: number = 1;
-  
-  constructor(public productService:ProductService,
-    private route:ActivatedRoute,private router:Router) {
+  p = 1;
+  constructor(public productService: ProductService,
+              private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit() {
@@ -32,7 +31,13 @@ export class CategoryComponent implements OnInit {
     })
     .subscribe(params => {
       this.category = params.get('category');
-      this.applyFilter();      
+      if(this.category) {
+        window.scroll({
+          top: 600,
+          behavior: 'smooth'
+        });
+      }
+      this.applyFilter();
     });
 
   // this.subscription.subscribe(p=>{console.log(p)})
