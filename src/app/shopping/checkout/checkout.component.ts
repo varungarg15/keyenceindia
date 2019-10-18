@@ -74,7 +74,7 @@ export class CheckoutComponent implements OnInit {
         let toAppend = '';
           if(this.cart){
           for (let productId in this.objectKey){
-            toAppend+=`<b>S.No</b>     - ${productId+1}<br>`;
+            toAppend+=`<b>S.No</b>     - ${Number(productId)+1}<br>`;
             toAppend+=`<b>Product</b>  - ${this.cart[this.objectKey[productId]]['product'].title}<br>`;
             toAppend+=`<b>Quantity</b> - ${this.cart[this.objectKey[productId]]['quantity']}<br>`
           }
