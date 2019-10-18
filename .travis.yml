@@ -1,0 +1,16 @@
+language: node_js
+node_js:
+  - "11.0"
+branches:
+  only:
+    - master
+before_script:
+  - npm install -g @angular/cli
+script:
+  - npm install
+  - npm run build
+deploy:
+  skip_cleanup: true
+  provider: firebase
+  token:
+    secure: "1//0gdQeGiS14jerCgYIARAAGBASNwF-L9Irct9SQ_HTeP2d7DhkyUsdCx4-OqoyalhJ_vt_Iw_lxV3AljN0wHKgerbaQnsH2G1rxGQ"
