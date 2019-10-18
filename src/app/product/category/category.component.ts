@@ -13,32 +13,46 @@ declare var $:any;
 })
 export class CategoryComponent implements OnInit {
 
+  countries = [
+    {id: 1, name: "United States"},
+    {id: 2, name: "Australia"},
+    {id: 3, name: "Canada"},
+    {id: 4, name: "Brazil"},
+    {id: 5, name: "England"}
+  ];
+  selectedCategory = null;
+
+
   products;
   subscription;
   filteredProduct;
   categories;
   category;
-  p = 1;
-  constructor(public productService: ProductService,
-              private route: ActivatedRoute, private router: Router) {
+  categorys;
+  p= 1;
+  keys;
+  constructor(public productService:ProductService,
+    private route:ActivatedRoute,private router:Router) {
   }
 
   ngOnInit() {
-    this.subscription= this.productService.getAll().valueChanges()
-    .switchMap(products => {
-      this.filteredProduct = products;
-      return this.route.queryParamMap;
+    this.subscription= this.productService.getAll().snapshotChanges()
+    .switchMap(keys => {
+      // console.log(products)
+      this.keys=keys
+    return this.productService.getAll().valueChanges();
     })
-    .subscribe(params => {
-      this.category = params.get('category');
-      if(this.category) {
-        window.scroll({
-          top: 600,
-          behavior: 'smooth'
-        });
-      }
-      this.applyFilter();
-    });
+    .switchMap(products => {
+       for(let p in products){
+         products[p]['key']=this.keys[p].key
+       }
+       console.log(products)
+       this.filteredProduct=products
+      return this.route.queryParamMap
+    }).subscribe(params=>{
+      this.category = params.get('category'); 
+      this.applyFilter();      
+    })
 
   // this.subscription.subscribe(p=>{console.log(p)})
     this.getCategories()
@@ -78,7 +92,17 @@ export class CategoryComponent implements OnInit {
       });
     }
   }
-  
+
+  nav(value){
+    console.log(value)
+    if(value=="All Category"){
+       console.log(value)
+      this.router.navigate(['/category'])
+    }
+    else
+    this.router.navigate(['/category'],{queryParams:{'category':value}})
+  }
+
   filter(query: string) {
     let q = query.toLowerCase();
     this.products = this.filteredProduct;
@@ -100,7 +124,10 @@ export class CategoryComponent implements OnInit {
 
   private applyFilter() { 
     this.products = (this.category && this.filteredProduct) ? 
-    this.filteredProduct.filter(p => p.category.toLowerCase() == this.category.toLowerCase()) : 
+    this.filteredProduct.filter(p =>{
+      console.log(p.category.toLowerCase() == this.category.toLowerCase())
+      return p.category.toLowerCase() == this.category.toLowerCase()
+      }) : 
     this.filteredProduct;
   }
 

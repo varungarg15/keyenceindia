@@ -13,16 +13,20 @@ export class CartComponent implements OnInit {
   cart;
   objectKey;
   subscription;
+  total;
   constructor(private productService:ProductService,private cartService:CartService) { }
 
   async ngOnInit() {
   this.subscription= (await this.cartService.getCart()).valueChanges().subscribe(cart=>{
+    this.total=this.cartService.totalCount(cart);
   if(cart){ 
   this.cart=cart.items
   this.objectKey= Object.keys(cart.items);
   console.log(this.cart[this.objectKey[0]]['product'])
-  console.log(cart) }})
+  console.log(cart) 
+}})
   }
+
 
   trackByFn(index,item){
     return index;

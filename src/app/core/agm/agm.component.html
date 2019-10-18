@@ -7,10 +7,10 @@
   >
 
   <agm-marker 
-  (markerClick)="clickedMarker(m.label, 0)"
+  (markerClick)="clickedMarker(0)"
   [latitude]="lat"
   [longitude]="lng"
-  (dragEnd)="markerDragEnd(m, $event)">
+  (dragEnd)="markerDragEnd( $event)">
   
 <agm-info-window>
   <strong>{{name}}</strong>

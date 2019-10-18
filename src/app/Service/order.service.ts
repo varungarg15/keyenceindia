@@ -24,5 +24,10 @@ export class OrderService {
     return this.db.list('/orders',ref => ref.orderByChild('userId').equalTo(userId));
   }
 
+  async placedNotification(notification){
+    let result = await this.db.list('/appNotifications').push(notification)
+    return result;
+  }
+
   
 }

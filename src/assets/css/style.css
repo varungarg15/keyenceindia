@@ -2716,7 +2716,7 @@ ul {
 
 /* line 68, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_feature_part.scss */
 .feature_part .single_feature_post_text img {
-  position: absolute;
+  /* position: absolute; */
   bottom: 0;
   right: 15px;
 }
@@ -7412,7 +7412,7 @@ h6 {
 
 /* line 1, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_breadcrumb.scss */
 .breadcrumb_bg {
-  background-image: url("../img/breadcrumb.png");
+  background-image: url("/assets/img/product/c.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

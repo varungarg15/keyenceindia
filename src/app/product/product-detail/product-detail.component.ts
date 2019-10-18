@@ -62,46 +62,31 @@ export class ProductDetailComponent implements OnInit {
 
     this.id = this.route.snapshot.paramMap.get('id');
     
-    this.productService.getAll().snapshotChanges().take(1).
-    subscribe(p=>{ this.productId=p[this.id].key
-      this.productService.get(p[this.id].key).valueChanges()
+      this.productService.get(this.id).valueChanges()
       .subscribe(p=>{this.product=p
-    console.log(this.product)})})
-
+    console.log(this.product)
+  })
     this.subscription = (await this.cartService.getCart()).valueChanges().subscribe(
       cart => {
         this.cart = cart;
-        console.log(this.cart)
-       //  console.log(this.cart.getQuantity(this.product));
-       //  this.quantity=cart.getQuantity(this.product);
-       // console.log( cart.totalItemsCount+ " "+cart.totalPrice)
        });
-
      }
-
-  
 
   getQuantity(product) {
     if (!this.cart) return null;
-    if (this.cart && this.cart.items && this.productId) {
-      let item = this.cart.items[this.productId]
-      // console.log(this.cart.items[this.key]+' '+product.title)
-      // console.log(this.cart.items[product.$key])
+    if (this.cart && this.cart.items) {
+      let item = this.cart.items[this.id]
       return item ? item.quantity : null;
     }
   }
 
   addToCart(){
-    //  console.log(this.product)
-      console.log(this.product+' '+this.productId)
-    this.cartService.addToCart(this.product,this.productId)
-    // console.log(this.cart)
+    console.log(this.product+' '+this.id)
+    this.cartService.addToCart(this.product,this.id)
    }
 
    removeFromCart(){
-    //  console.log(product)
-    this.cartService.removeFromCart(this.product,this.productId)
-    // console.log(this.cart)
+    this.cartService.removeFromCart(this.product,this.id)
    }
 
    ngOnDestroy(){
